@@ -1,7 +1,7 @@
 'use strict';
 
 const TokenGenerator = require('../helpers/TokenGenerator');
-const store = require('../helpers/SecureStore').global;
+const store = require('../helpers/FileStorage').global;
 
 function getCredentialsKey(conversation) {
     return `credentials.${conversation.context.user}`;
