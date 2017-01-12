@@ -27,12 +27,10 @@ butler.startRTM((err) => {
     console.log('Butler has woken up and will start serving masters...');
 });
 
-function putButlerToRest() {
+process.on('SIGTERM', () => process.exit(0));
+process.on('SIGINT', () => process.exit(0));
+process.on('exit', () => {
     console.log('\nBT butler is going to sleep now...');
 
     butler.destroy();
-}
-
-process.on('exit', putButlerToRest);
-process.on('SIGTERM', () => process.exit(0));
-process.on('SIGINT', () => process.exit(0));
+});

@@ -1,7 +1,7 @@
 {
-  "name": "bt-buttler-bot",
+  "name": "daitan-butler-bot",
   "version": "0.1.0",
-  "description": "The BT slack bot helper",
+  "description": "The Daitan butler. The ultimate development team helper.",
   "main": "index.js",
   "author": "Allan Baptista (allan.marques@ymail.com)",
   "license": "MIT",

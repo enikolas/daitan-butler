@@ -24,7 +24,7 @@ ansi-styles@^2.2.1:
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/ansi-styles/-/ansi-styles-2.2.1.tgz#b432dd3358b634cf75e1e4664368240533c1ddbe"
 
-array-back@^1.0.2, array-back@^1.0.3:
+array-back@^1.0.2, array-back@^1.0.3, array-back@^1.0.4:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/array-back/-/array-back-1.0.4.tgz#644ba7f095f7ffcf7c43b5f0dc39d3c1f03c063b"
   dependencies:
@@ -131,8 +131,8 @@ boom@2.x.x:
     hoek "2.x.x"
 
 botbuilder@^3.2.3:
-  version "3.4.4"
-  resolved "https://registry.yarnpkg.com/botbuilder/-/botbuilder-3.4.4.tgz#6938d9ce44923bdba95010ac936c68d823d77011"
+  version "3.5.3"
+  resolved "https://registry.yarnpkg.com/botbuilder/-/botbuilder-3.5.3.tgz#07eec6c201902d99a2c8ce27b4b8b025f73b2e94"
   dependencies:
     async "^1.5.2"
     base64url "^1.0.6"
@@ -143,17 +143,18 @@ botbuilder@^3.2.3:
     request "^2.69.0"
     rsa-pem-from-mod-exp "^0.8.4"
     sprintf-js "^1.0.3"
+    url-join "^1.1.0"
 
 botkit-studio-sdk@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/botkit-studio-sdk/-/botkit-studio-sdk-1.0.0.tgz#829823057deb55cef5aeb9eb4eb3cbdd9d218a60"
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/botkit-studio-sdk/-/botkit-studio-sdk-1.0.1.tgz#7461bcdd3806eeb7cfcdce0511300a996a7183db"
   dependencies:
     promise "^7.1.1"
     request "^2.67.0"
 
 botkit@^0.4.5:
-  version "0.4.5"
-  resolved "https://registry.yarnpkg.com/botkit/-/botkit-0.4.5.tgz#5cc40ee48e97e633e2ffcc0ab228b44899feb40b"
+  version "0.4.9"
+  resolved "https://registry.yarnpkg.com/botkit/-/botkit-0.4.9.tgz#2a5e07e3ad6b347ec63bff802710c86d943f0a07"
   dependencies:
     async "^2.0.0-rc.5"
     back "^1.0.1"
@@ -210,8 +211,8 @@ chalk@^1.1.1:
     supports-color "^2.0.0"
 
 charenc@~0.0.1:
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/charenc/-/charenc-0.0.1.tgz#004cff9feaf102382ed12db58dd6f962796d6e88"
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/charenc/-/charenc-0.0.2.tgz#c0a1d2f3a7092e03774bfa83f14c0fc5790a8667"
 
 chrono-node@^1.1.3:
   version "1.2.5"
@@ -250,11 +251,10 @@ combined-stream@^1.0.5, combined-stream@~1.0.5:
     delayed-stream "~1.0.0"
 
 command-line-args@^3.0.0:
-  version "3.0.4"
-  resolved "https://registry.yarnpkg.com/command-line-args/-/command-line-args-3.0.4.tgz#06124399c79b055b24003425f4eb823227b83e95"
+  version "3.0.5"
+  resolved "https://registry.yarnpkg.com/command-line-args/-/command-line-args-3.0.5.tgz#5bd4ad45e7983e5c1344918e40280ee2693c5ac0"
   dependencies:
-    array-back "^1.0.3"
-    core-js "^2.4.1"
+    array-back "^1.0.4"
     feature-detect-es6 "^1.3.1"
     find-replace "^1.0.2"
     typical "^2.6.0"
@@ -289,17 +289,13 @@ cookie@0.3.1:
   version "0.3.1"
   resolved "https://registry.yarnpkg.com/cookie/-/cookie-0.3.1.tgz#e7e0a1f9ef43b4c8ba925c5c5a96e806d16873bb"
 
-core-js@^2.4.1:
-  version "2.4.1"
-  resolved "https://registry.yarnpkg.com/core-js/-/core-js-2.4.1.tgz#4de911e667b0eae9124e34254b53aea6fc618d3e"
-
 core-util-is@~1.0.0:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/core-util-is/-/core-util-is-1.0.2.tgz#b5fd54220aa2bc5ab57aab7140c940754503c1a7"
 
 crypt@~0.0.1:
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/crypt/-/crypt-0.0.1.tgz#5f11b21a6c05ef1b5e79708366da6374ece1e6a2"
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/crypt/-/crypt-0.0.2.tgz#88d7ff7ec0dfb86f713dc87bbb42d044d3e6c41b"
 
 cryptiles@2.x.x:
   version "2.0.5"
@@ -739,8 +735,8 @@ lodash.once@^4.0.0:
   resolved "https://registry.yarnpkg.com/lodash.once/-/lodash.once-4.1.1.tgz#0dd3971213c7c56df880977d504c88fb471a97ac"
 
 lodash@4, lodash@^4.14.0, lodash@^4.17.2:
-  version "4.17.2"
-  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.2.tgz#34a3055babe04ce42467b607d700072c7ff6bf42"
+  version "4.17.4"
+  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.4.tgz#78203a4d1c328ae1d86dca6460e369b57f4055ae"
 
 lowdb@^0.14.0:
   version "0.14.0"
@@ -1213,6 +1209,10 @@ underscore@1.x:
 unpipe@1.0.0, unpipe@~1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/unpipe/-/unpipe-1.0.0.tgz#b2bf4ee8514aae6165b4817829d21b2ef49904ec"
+
+url-join@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/url-join/-/url-join-1.1.0.tgz#741c6c2f4596c4830d6718460920d0c92202dc78"
 
 util-deprecate@~1.0.1:
   version "1.0.2"
