@@ -6,7 +6,7 @@ The DaitanGroup butler. The ultimate development team helper.
 * NodeJS >= 4.4.x
 * Yarn (Optional, but recommended)
 * A ```.env``` file within project's root  with the following content:
-    ```sh
+    - ```sh
     SLACK_TOKEN=<SLACK-BOT-TOKEN>
     STORE_PARAPHRASE=<ANY-ENCRYPTION-PASSWORD>
     ```
