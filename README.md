@@ -7,10 +7,10 @@ The DaitanGroup butler. The ultimate development team helper.
 * Yarn (Optional, but recommended)
 * A ```.env``` file within project's root  with the following content:
 
-    ```sh
-    SLACK_TOKEN=<SLACK-BOT-TOKEN>
-    STORE_PARAPHRASE=<ANY-ENCRYPTION-PASSWORD>
-    ```
+```sh
+SLACK_TOKEN=<SLACK-BOT-TOKEN>
+STORE_PARAPHRASE=<ANY-ENCRYPTION-PASSWORD>
+```
 
 ### Running
 
