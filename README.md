@@ -21,6 +21,6 @@ The DaitanGroup butler. The ultimate development team helper.
 ### Development & Contributing
 
 * Please follow [AirBnB JS Style](https://github.com/airbnb/javascript) (with some overrides, as seen in ```.eslintrc.js``` in project's root)
-* ```yarn run lint``` or ```npm run lint``` often (It is run as a pre-commit rook anyway)
+* ```yarn run lint``` or ```npm run lint``` often (It is run as a pre-commit hook anyway)
 * No test suite yet, but comming (PRs around that are very welcome)
 * PR away!
