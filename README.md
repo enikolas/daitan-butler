@@ -3,7 +3,7 @@ The DaitanGroup butler. The ultimate development team helper.
 
 ### Requirements
 
-* NodeJS >= 4.4.x
+* NodeJS >= 6.x.x
 * Yarn (Optional, but recommended)
 * A ```.env``` file within project's root  with the following content:
 
