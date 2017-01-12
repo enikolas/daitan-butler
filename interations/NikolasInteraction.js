@@ -1,5 +1,3 @@
-'use strict';
-
 function NikolasInteraction(botController) {
     this.botController = botController;
 

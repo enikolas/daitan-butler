@@ -1,13 +1,11 @@
-'use strict';
+const defaultFetcher = require('request');
 
 function toBase64(str) {
     return new Buffer(str).toString('base64');
 }
 
 function TokenGenerator(fetcher) {
-    fetcher = fetcher || require('request');
-
-    this.fetcher = fetcher;
+    this.fetcher = fetcher || defaultFetcher;
 }
 
 TokenGenerator.prototype.setUsername = function setUsername(username) {
@@ -39,15 +37,15 @@ TokenGenerator.prototype._loginIntoIDesk = function logIntoIDesk(oneTimeToken) {
             jar: cookieJar
         }, (err, response, body) => {
             if (err) {
-                return reject(err);
+                return void reject(err);
             }
 
             if (response.statusCode > 399) {
-                return reject(new Error(`Was not able to log into IDesk, failed with ${response.statusCode} code. Info: \n ${body}`));
+                return void reject(new Error(`Was not able to log into IDesk, failed with ${response.statusCode} code. Info: \n ${body}`));
             }
 
             if (response.headers.location.includes('failed')) {
-                return reject(new Error(`Was not able to log into IDesk, Bad credentials or one time token.`));
+                return void reject(new Error('Was not able to log into IDesk, Bad credentials or one time token.'));
             }
 
             resolve(cookieJar);
@@ -59,10 +57,10 @@ TokenGenerator.prototype._generateToken = function generateToken(sessionCookieJa
     return new Promise((resolve, reject) => {
         this.fetcher.post({
             url: 'https://idesk.bt.com/svnauthenticator/service/SvnAuthenticator/,DanaInfo=collaborate.bt.com,SSL,dom=1,CT=sxml+',
-            headers: {'Content-Type': 'text/xml'},
+            headers: { 'Content-Type': 'text/xml' },
             jar: sessionCookieJar,
             body: (
-`<soapenv:Envelope xmlns:ns=\"http://collaborate.bt.com/svn/rsa/2010/02\" xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\">
+`<soapenv:Envelope xmlns:ns="http://collaborate.bt.com/svn/rsa/2010/02" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
     <soapenv:Body>
         <username>${toBase64(this.username)}</username>
         <password>${toBase64(this.password)}</password>
@@ -71,11 +69,11 @@ TokenGenerator.prototype._generateToken = function generateToken(sessionCookieJa
             )
         }, (err, response, body) => {
             if (err) {
-                return reject(err);
+                return void reject(err);
             }
 
             if (response.statusCode > 399) {
-                return reject(new Error(`Was not able to generate token, failed with ${response.statusCode} code. Info: \n ${body}`));
+                return void reject(new Error(`Was not able to generate token, failed with ${response.statusCode} code. Info: \n ${body}`));
             }
 
             const pattern = /(authtoken:[a-z0-9]+)/;

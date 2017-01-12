@@ -1,5 +1,3 @@
-'use strict';
-
 const low = require('lowdb');
 const SecureSerializer = require('./SecureSerializer');
 

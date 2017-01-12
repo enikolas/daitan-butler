@@ -1,5 +1,3 @@
-'use strict';
-
 require('dotenv').config();
 const BotKit = require('botkit');
 const interactions = require('./interations');
@@ -11,7 +9,7 @@ const controller = BotKit.slackbot({
 
 controller.interactions = {};
 
-Object.keys(interactions).forEach(interactionName => {
+Object.keys(interactions).forEach((interactionName) => {
     controller.interactions[interactionName] = new (interactions[interactionName])(controller);
 });
 
@@ -21,7 +19,7 @@ butler.startRTM((err) => {
     if (err) {
         console.error('Butler could not wake up. Reason:', err.message);
 
-        return process.exit(1);
+        return void process.exit(1);
     }
 
     console.log('Butler has woken up and will start serving masters...');
