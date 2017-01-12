@@ -1,3 +1,4 @@
+const AbstractInteraction = require('../helpers/AbstractInteraction');
 const TokenGenerator = require('../helpers/TokenGenerator');
 const store = require('../helpers/FileStorage').global;
 
@@ -9,13 +10,7 @@ function getBot(conversation) {
     return conversation.context.bot;
 }
 
-function TokenInteraction(botController) {
-    this.botController = botController;
-
-    this.start();
-}
-
-TokenInteraction.prototype._handleConversation = function handleConversationStart(err, convo) {
+function handleConversation(err, convo) {
     const credentialsKey = getCredentialsKey(convo);
     const botRemembersUser = store.has(credentialsKey);
     let username = '';
@@ -77,12 +72,14 @@ TokenInteraction.prototype._handleConversation = function handleConversationStar
             });
         });
     });
-};
+}
 
-TokenInteraction.prototype.start = function start() {
-    this.botController.hears(['token', 'Token'], ['direct_message', 'direct_mention'], (butler, message) => {
-        butler.startPrivateConversation(message, this._handleConversation.bind(this));
-    });
-};
+class TokenInteraction extends AbstractInteraction {
+    start() {
+        this.getBotController().hears(['token', 'Token'], ['direct_message', 'direct_mention'], (butler, message) => {
+            butler.startPrivateConversation(message, handleConversation);
+        });
+    }
+}
 
 module.exports = TokenInteraction;

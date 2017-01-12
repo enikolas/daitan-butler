@@ -15,20 +15,22 @@ function decrypt(paraphrase, str) {
     return decipher.update(str, 'hex', 'utf8') + decipher.final('utf8');
 }
 
-function SecureSerializer(paraphrase) {
-    paraphrases.set(this, paraphrase);
+class SecureSerializer {
+    constructor(paraphrase) {
+        paraphrases.set(this, paraphrase);
+    }
+
+    serialize(obj) {
+        const str = JSON.stringify(obj);
+
+        return encrypt(paraphrases.get(this), str);
+    }
+
+    deserialize(str) {
+        const decrypted = decrypt(paraphrases.get(this), str);
+
+        return JSON.parse(decrypted);
+    }
 }
-
-SecureSerializer.prototype.serialize = function serialize(obj) {
-    const str = JSON.stringify(obj);
-
-    return encrypt(paraphrases.get(this), str);
-};
-
-SecureSerializer.prototype.deserialize = function deserialize(str) {
-    const decrypted = decrypt(paraphrases.get(this), str);
-
-    return JSON.parse(decrypted);
-};
 
 module.exports = SecureSerializer;

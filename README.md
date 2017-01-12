@@ -21,6 +21,7 @@ STORE_PARAPHRASE=<ANY-ENCRYPTION-PASSWORD>
 
 ### Development & Contributing
 
+* The bot is built using the awesome [Botkit](https://github.com/howdyai/botkit)
 * Please follow [AirBnB JS Style](https://github.com/airbnb/javascript) (with some overrides, as seen in ```.eslintrc.js``` in project's root)
 * ```yarn run lint``` or ```npm run lint``` often (It is run as a pre-commit hook anyway)
 * No test suite yet, but comming (PRs around that are very welcome)

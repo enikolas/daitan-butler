@@ -14,29 +14,31 @@ function createStore(filename, serializer) {
     return low(filename, options);
 }
 
-function FileStorage(storeName, serializer) {
-    this.store = createStore(storeName, serializer);
+class FileStorage {
+    constructor(storeName, serializer) {
+        this.store = createStore(storeName, serializer);
+    }
+
+    set(name, value) {
+        this.store.set(name, value).value();
+
+        return this;
+    }
+
+    get(name) {
+        return this.store.get(name).value();
+    }
+
+    has(name) {
+        return this.store.has(name).value();
+    }
+
+    ['delete'](name) {
+        this.store.unset(name).value();
+
+        return this;
+    }
 }
-
-FileStorage.prototype.set = function set(name, value) {
-    this.store.set(name, value).value();
-
-    return this;
-};
-
-FileStorage.prototype.get = function get(name) {
-    return this.store.get(name).value();
-};
-
-FileStorage.prototype.has = function has(name) {
-    return this.store.has(name).value();
-};
-
-FileStorage.prototype.delete = function _delete(name) {
-    this.store.unset(name).value();
-
-    return this;
-};
 
 module.exports = FileStorage;
 module.exports.global = new FileStorage('global.json', new SecureSerializer(process.env.STORE_PARAPHRASE));

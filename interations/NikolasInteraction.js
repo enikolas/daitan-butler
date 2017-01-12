@@ -1,13 +1,11 @@
-function NikolasInteraction(botController) {
-    this.botController = botController;
+const AbstractInteraction = require('../helpers/AbstractInteraction');
 
-    this.start();
+class NikolasInteraction extends AbstractInteraction {
+    start() {
+        this.getBotController().hears('nikolas', ['direct_message', 'direct_mention'], (butler, message) => {
+            butler.reply(message, 'Senhor Nikolas precisa fazer a barba, meu bom senhor.');
+        });
+    }
 }
-
-NikolasInteraction.prototype.start = function start() {
-    this.botController.hears('nikolas', ['direct_message', 'direct_mention'], (butler, message) => {
-        butler.reply(message, 'Senhor Nikolas precisa fazer a barba, meu bom senhor.');
-    });
-};
 
 module.exports = NikolasInteraction;
