@@ -2,6 +2,7 @@ require('dotenv').config();
 const BotKit = require('botkit');
 const interactions = require('./interations');
 
+let wakeupRetries = 0;
 let botSleptGracefully = false;
 
 function makeBotController() {
@@ -29,12 +30,15 @@ function wakeButlerUp(butler) {
             console.error('Butler could not wake up. Reason:', err.message);
             console.log('Retrying...');
 
-            setTimeout(wakeButlerUp, 8000);
+            setTimeout(wakeButlerUp, 8000 * (wakeupRetries += 1));
 
             return;
         }
 
         console.log('Butler has woken up and will start serving masters...');
+
+        // Successful connection, reseting wakeup retries tracker
+        wakeupRetries = 0;
     });
 }
 
