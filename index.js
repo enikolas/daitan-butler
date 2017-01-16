@@ -2,6 +2,8 @@ require('dotenv').config();
 const BotKit = require('botkit');
 const interactions = require('./interations');
 
+let botSleptGracefully = false;
+
 function makeBotController() {
     const controller = BotKit.slackbot({
         debug: false,
@@ -37,13 +39,18 @@ function wakeButlerUp(butler) {
 }
 
 function setUpErrorHandlers(controller, bot) {
-    controller.on('rtm_close', wakeButlerUp);
+    controller.on('rtm_close', () => {
+        if (botSleptGracefully) return;
+
+        wakeButlerUp(bot);
+    });
 
     process.on('SIGTERM', () => process.exit(0));
     process.on('SIGINT', () => process.exit(0));
     process.on('exit', () => {
         console.log('\nBT butler is going to sleep now...');
 
+        botSleptGracefully = true;
         bot.destroy();
     });
 }
