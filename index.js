@@ -2,33 +2,57 @@ require('dotenv').config();
 const BotKit = require('botkit');
 const interactions = require('./interations');
 
-const controller = BotKit.slackbot({
-    debug: false,
-    require_delivery: true
-});
+function makeBotController() {
+    const controller = BotKit.slackbot({
+        debug: false,
+        require_delivery: true
+    });
 
-controller.interactions = {};
+    controller.interactions = {};
 
-Object.keys(interactions).forEach((interactionName) => {
-    controller.interactions[interactionName] = new (interactions[interactionName])(controller);
-});
+    Object.keys(interactions).forEach((interactionName) => {
+        controller.interactions[interactionName] = new (interactions[interactionName])(controller);
+    });
 
-const butler = controller.spawn({ token: process.env.SLACK_TOKEN });
+    return controller;
+}
 
-butler.startRTM((err) => {
-    if (err) {
-        console.error('Butler could not wake up. Reason:', err.message);
+function makeBot(controller, slackToken) {
+    return controller.spawn({ token: slackToken });
+}
 
-        return void process.exit(1);
-    }
+function wakeButlerUp(butler) {
+    butler.startRTM((err) => {
+        if (err) {
+            console.error('Butler could not wake up. Reason:', err.message);
+            console.log('Retrying...');
 
-    console.log('Butler has woken up and will start serving masters...');
-});
+            setTimeout(wakeButlerUp, 8000);
 
-process.on('SIGTERM', () => process.exit(0));
-process.on('SIGINT', () => process.exit(0));
-process.on('exit', () => {
-    console.log('\nBT butler is going to sleep now...');
+            return;
+        }
 
-    butler.destroy();
-});
+        console.log('Butler has woken up and will start serving masters...');
+    });
+}
+
+function setUpErrorHandlers(controller, bot) {
+    controller.on('rtm_close', wakeButlerUp);
+
+    process.on('SIGTERM', () => process.exit(0));
+    process.on('SIGINT', () => process.exit(0));
+    process.on('exit', () => {
+        console.log('\nBT butler is going to sleep now...');
+
+        bot.destroy();
+    });
+}
+
+const botController = makeBotController();
+const butler = makeBot(botController, process.env.SLACK_TOKEN);
+
+// Handle global errors and error events
+setUpErrorHandlers(botController, butler);
+
+// Butler, go to work;
+wakeButlerUp(butler);
