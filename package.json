@@ -6,13 +6,20 @@
   "author": "Allan Baptista (allan.marques@ymail.com)",
   "license": "MIT",
   "scripts": {
+    "forever": "npm run forever:stop; npm run forever:start && npm run forever:logs",
+    "forever:stop": "forever stop index.js;",
+    "forever:start": "forever start index.js",
+    "forever:logs": "forever logs index.js -f",
     "start": "node ./index.js",
     "lint": "eslint ."
   },
-  "pre-commit": ["lint"],
+  "pre-commit": [
+    "lint"
+  ],
   "dependencies": {
     "botkit": "^0.4.5",
     "dotenv": "^2.0.0",
+    "forever": "^0.15.3",
     "lodash": "^4.17.2",
     "lowdb": "^0.14.0",
     "request": "^2.79.0"

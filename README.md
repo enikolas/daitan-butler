@@ -19,6 +19,16 @@ STORE_PARAPHRASE=<ANY-ENCRYPTION-PASSWORD>
 1. ```yarn``` or ```npm install```
 2. ```yarn run start``` or ```npm start```
 
+### Running as a background process
+
+(At project's root)
+
+1. ```yarn``` or ```npm install```
+2. ```yarn run forever``` or ```npm run forever``` OR:
+    - ```yarn run forever:start``` or ```npm run forever:start```to start the bot process in background
+    - ```yarn run forever:logs``` or ```npm run forever:logs``` to show the process logs
+    - ```yarn run forever:stop``` or ```npm run forever:stop``` to kill the bot process
+
 ### Development & Contributing
 
 * The bot is built using the awesome [Botkit](https://github.com/howdyai/botkit)

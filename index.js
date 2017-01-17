@@ -2,8 +2,7 @@ require('dotenv').config();
 const BotKit = require('botkit');
 const interactions = require('./interations');
 
-let wakeupRetries = 0;
-let botSleptGracefully = false;
+const MAX_RETRIES = 10;
 
 function makeBotController() {
     const controller = BotKit.slackbot({
@@ -21,49 +20,44 @@ function makeBotController() {
 }
 
 function makeBot(controller, slackToken) {
-    return controller.spawn({ token: slackToken });
+    return controller.spawn({ token: slackToken, retry: MAX_RETRIES });
 }
 
-function wakeButlerUp(butler) {
+function sleepGracefully() {
+    process.exit(0);
+}
+
+function putBotToSleep(bot) {
+    console.log('\nBT butler is going to sleep now...');
+
+    bot.destroy();
+}
+
+function setUpGlobalHandlers(bot) {
+    process.on('SIGTERM', sleepGracefully);
+    process.on('SIGINT', sleepGracefully);
+    process.on('exit', putBotToSleep.bind(null, bot));
+}
+
+function wakeBotUp(butler) {
     butler.startRTM((err) => {
         if (err) {
-            console.error('Butler could not wake up. Reason:', err.message);
-            console.log('Retrying...');
-
-            setTimeout(wakeButlerUp, 8000 * (wakeupRetries += 1));
-
-            return;
+            return void console.error('Butler could not wake up. Reason:', err.message);
         }
 
         console.log('Butler has woken up and will start serving masters...');
-
-        // Successful connection, reseting wakeup retries tracker
-        wakeupRetries = 0;
     });
 }
 
-function setUpErrorHandlers(controller, bot) {
-    controller.on('rtm_close', () => {
-        if (botSleptGracefully) return;
+function startButlerBot(controller) {
+    const butler = makeBot(controller, process.env.SLACK_TOKEN);
 
-        wakeButlerUp(bot);
-    });
+    setUpGlobalHandlers(butler);
+    wakeBotUp(butler);
 
-    process.on('SIGTERM', () => process.exit(0));
-    process.on('SIGINT', () => process.exit(0));
-    process.on('exit', () => {
-        console.log('\nBT butler is going to sleep now...');
-
-        botSleptGracefully = true;
-        bot.destroy();
-    });
+    return butler;
 }
 
 const botController = makeBotController();
-const butler = makeBot(botController, process.env.SLACK_TOKEN);
 
-// Handle global errors and error events
-setUpErrorHandlers(botController, butler);
-
-// Butler, go to work;
-wakeButlerUp(butler);
+startButlerBot(botController);
