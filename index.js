@@ -1,6 +1,6 @@
 require('dotenv').config();
 const BotKit = require('botkit');
-const interactions = require('./interations');
+const interactions = require('./interactions');
 
 const MAX_RETRIES = 10;
 
