@@ -7,8 +7,8 @@
   "license": "MIT",
   "scripts": {
     "forever": "npm run forever:stop; npm run forever:start && npm run forever:logs",
-    "forever:stop": "forever stop index.js;",
-    "forever:start": "forever start index.js",
+    "forever:stop": "forever stop index.js",
+    "forever:start": "forever start -a -l forever-daitan-butler.log -o daitan-butler.log -e daitan-butler-err.log index.js",
     "forever:logs": "forever logs index.js -f",
     "start": "node ./index.js",
     "lint": "eslint ."
