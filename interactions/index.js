@@ -2,5 +2,6 @@
 
 module.exports = {
     NikolasInteraction: require('./NikolasInteraction'),
-    TokenInteraction: require('./TokenInteraction')
+    TokenInteraction: require('./TokenInteraction'),
+    LogTimeInteraction: require('./LogTimeInteraction')
 };

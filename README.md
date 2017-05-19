@@ -10,6 +10,7 @@ The DaitanGroup butler. The ultimate development team helper.
 ```sh
 SLACK_TOKEN=<SLACK-BOT-TOKEN>
 STORE_PARAPHRASE=<ANY-ENCRYPTION-PASSWORD>
+TIMEKEEPER_URL=<TARGET-TIMEKEEPER-URL>
 ```
 
 ### Running
